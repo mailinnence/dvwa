@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+    <h2>The XMLHttpRequest Object</h2>
+    <button type="button" onclick="loadDoc()">Change Content</button>
+</div>
+
+<script>
+
+    function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        document.write(xhttp.readyState);
+        document.write('<br>');
+        document.write(xhttp.status);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var htmltext = this.responseText;               //변수를 text로 받는다
+                var parser = new DOMParser();                   //DOM 객체사용
+                var htmlDOC = parser.parseFromString(htmltext, 'text/html');    //받는 변수에다가 html 로 넣는다
+                csrftoken = htmlDOC.getElementsByClassName('gb_nb')[0].textContent;   //유저토큰을 찾아서 변수에 저장장
+               document.getElementById("demo").innerHTML = csrftoken;
+            }
+        };
+
+        xhttp.open("GET", "http://myaccount.google.com/personal-info");
+        xhttp.withCredentials = "true";
+        xhttp.send();
+    }
+
+
+
+</script>
+
+</body>
+</html>

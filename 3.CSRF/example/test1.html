@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+
+    <script>
+        function check_input()
+        {
+            if (!document.login_form.id.value)
+            {
+                alert("아이디를 입력하세요");
+                document.login_form.id.focus();
+                return;
+            }
+
+            if (!document.login_form.pass.value)
+            {
+                alert("비밀번호를 입력하세요");
+                document.login_form.pass.focus();
+                return;
+            }
+            document.login_form.submit();
+        }
+    </script>
+    <style>
+
+        input{
+            background-color:#fafafa;
+            border-color: rgba(255,255,255,0.3);
+            border:groove 2px;
+            border-radius: 3px;
+            width: 250px;
+            height:32px
+
+        }
+        body {
+            text-align: center;
+        }
+
+        #a1{
+            padding-right: 18px;
+            margin: 20px;
+
+        }
+
+        .a2{
+            margin: 2px;
+
+        }
+
+
+        #a3{
+            margin: 4px;
+
+        }
+    </style>
+</head>
+<body>
+<img id='a1' src="image/mask.PNG" width="200px" height="80px">
+<br>
+<input class="a2" type='text'  placeholder="전화번호, 사용자 이름 또는 이메일">
+<br>
+<input class="a2" type='password' placeholder="비밀번호">
+<br>
+<div id="login_btn">
+<a href="#"><img id='a3' src="image/button.PNG" width="268px" height="42px" onclick="check_input()">
+</a>
+</div>
+
+
+</body>
+</html>

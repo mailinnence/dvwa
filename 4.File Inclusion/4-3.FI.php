@@ -11,7 +11,8 @@
 </div>
 </body>
 <?php
-include "C:\\xampp\\htdocs\\3.dvwa\\1-1.fi.php";
+include "C:\\xampp\\htdocs\\3.dvwa\\4.File Inclusion\\1-1.fi.php";
+
 $file = $_GET[ 'page' ];
 
 if( isset( $file ) ){

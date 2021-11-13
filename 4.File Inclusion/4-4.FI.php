@@ -12,7 +12,8 @@
 </div>
 </body>
 <?php
-include "C:\\xampp\\htdocs\\3.dvwa\\1-1.fi.php";
+include "C:\\xampp\\htdocs\\3.dvwa\\4.File Inclusion\\1-1.fi.php";
+
 $file = $_GET[ 'page' ];
 if( isset( $file ) ){
     if( $file != "include.php" && $file != "file1.php" && $file != "file2.php" && $file != "file3.php") {

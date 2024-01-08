@@ -25,7 +25,7 @@
 
     <?php
 //보안을 안하면 운영체제 명령어 입력시 위험해진다.
-// 윈도우 기준 |dir ,리눅스 기준 cat /etc/password;
+// 윈도우 기준 |dir ,리눅스 기준 cat /etc/passwd;
     if( isset( $_POST[ 'Submit' ]  ) ) {        //보냈다면
         // Get input
         $target = $_REQUEST[ 'ip' ];
